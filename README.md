@@ -32,6 +32,14 @@ Ensure that this file is only readable by `root`:
 
         chmod 0440 /usr/local/etc/jupyterhub/env
 
+# User creation
+
+The jupyterhub is getting access to the local usernames defined in the /etc/passwd file (only the names, not the passwords!). So in order to create new users, one need to create new users locally that have the same usernames as the github usernames.
+
+	useradd -u <github_username> -o
+
+Don't forget to restart the topfarm_hub container after that. 
+
 # Running
 
 	docker run -d -p 8000:8000 -v /var/run/docker.sock:/docker.sock -v /etc/passwd:/srv/jupyterhub/userlist --env-file /usr/local/etc/jupyter/env --net=host --name jupyterhub ptimof/jupyterhub
