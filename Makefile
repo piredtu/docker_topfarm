@@ -2,7 +2,7 @@
 user:
 	docker build -t piredtu/topfarm_systemuser systemuser
 
-hub: systemuser
+hub: user
 	docker build -t piredtu/topfarm_hub jupyterhub
 
 run:

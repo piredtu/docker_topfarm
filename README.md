@@ -42,7 +42,7 @@ Don't forget to restart the topfarm_hub container after that.
 
 # Running
 
-	docker run -d -p 8000:8000 -v /var/run/docker.sock:/docker.sock -v /etc/passwd:/srv/jupyterhub/userlist --env-file /usr/local/etc/jupyter/env --net=host --name jupyterhub ptimof/jupyterhub
+	docker run -d -p 8000:8000 -v /var/run/docker.sock:/docker.sock -v /etc/passwd:/srv/jupyterhub/userlist --env-file /usr/local/etc/jupyter/env --net=host --name topfarm_hub piredtu/topfarm_hub
 
 # Debugging
 
