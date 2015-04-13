@@ -1,4 +1,5 @@
 #!/bin/bash
+VENVDIR=/install
 if [ ! -d $HOME/.ipython/kernels ]; then
   mkdir $HOME/.ipython/kernels
 fi
@@ -10,7 +11,7 @@ cat > $HOME/.ipython/kernels/openmdao-$OMDAOVER/kernel.json <<EOF
 {
  "display_name": "Openmdao-$OMDAOVER", 
  "argv": [
-  "$HOME/openmdao-$OMDAOVER/bin/python", 
+  "$VENVDIR/openmdao-$OMDAOVER/bin/python", 
   "-m", 
   "IPython.kernel", 
   "-f", 

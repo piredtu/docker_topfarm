@@ -23,10 +23,13 @@ if [ ! -d $HOME/Notebooks/.setup ]; then
 fi
 
 # Move the openmdao directories to the user home
-if [ ! -d $HOME/.ipython/kernels ]; then
- 	sudo -E -u $USER cp -rp /install/openmdao* $HOME/
- 	sudo -E -u $USER /install/install_kernels.sh
-fi
+#if [ ! -d $HOME/.ipython/kernels ]; then
+# 	sudo -E -u $USER cp -rp /install/openmdao* $HOME/
+# 	sudo -E -u $USER /install/install_kernels.sh
+#fi
+
+chown -R $USER /install
+/install/install_kernels.sh
 
 exec sudo -E -u $USER jupyterhub-singleuser \
   --port=8888 \
