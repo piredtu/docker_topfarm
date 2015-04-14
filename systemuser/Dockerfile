@@ -9,6 +9,9 @@ RUN apt-get install -y -q \
     subversion \
     python-mysqldb
 
+RUN pip install virtualenv
+RUN pip3 install virtualenv
+
 WORKDIR /install/
 ADD install*.sh ./
 RUN chmod a+x install*.sh
