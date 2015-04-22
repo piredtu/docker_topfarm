@@ -29,7 +29,7 @@ fi
 #fi
 
 chown -R $USER /install
-/install/install_kernels.sh
+sudo -E -u $USER /install/install_kernels.sh
 
 exec sudo -E -u $USER jupyterhub-singleuser \
   --port=8888 \
