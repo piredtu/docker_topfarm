@@ -8,3 +8,5 @@ hub: user
 run:
 	docker run -d -p 8000:8000 -v /var/run/docker.sock:/docker.sock -v /etc/passwd:/srv/jupyterhub/userlist --env-file /root/env --net=host --name topfarm_hub piredtu/topfarm_hub
 
+bash:
+	docker run -it piredtu/topfarm_systemuser /bin/bash
