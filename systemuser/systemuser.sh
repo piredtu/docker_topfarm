@@ -8,9 +8,9 @@ useradd -u $USER_ID -o -s $SHELL $USER
 sed -i "s/jovyan/$USER/" /usr/local/share/jupyter/kernels/julia/kernel.json
 
 # install cached Julia modules
-if [ ! -d $HOME/.julia ]; then
-	sudo -E -u $USER tar zxf /usr/local/share/julia-cache.tar.gz
-fi
+#if [ ! -d $HOME/.julia ]; then
+#	sudo -E -u $USER tar zxf /usr/local/share/julia-cache.tar.gz
+#fi
 
 # make a Notebooks directory in the user's host home if it doesn't exist already
 sudo -E -u $USER mkdir -p $HOME/Notebooks
