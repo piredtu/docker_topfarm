@@ -1,24 +1,15 @@
 # Run with the DockerSpawner in JupyterHub
-# docker build -t ptimof/systemuser .
 
-FROM  ptimof/systemuser
+FROM  piredtu/topfarm:latest
 
+MAINTAINER Pierre-Elouan Rethore <pire@dtu.dk>
 
-RUN apt-get install -y -q \
-    wget \
-    subversion \
-    python-mysqldb
+ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/jupyterhub/singleuser.py /usr/local/bin/jupyterhub-singleuser
+RUN chmod 755 /usr/local/bin/jupyterhub-singleuser
 
-RUN pip install virtualenv
-RUN pip3 install virtualenv
-
-WORKDIR /install/
-ADD install*.sh ./
-RUN chmod a+x install*.sh
-RUN ./install_openmdao.sh
-RUN ./install_windflo.sh
-RUN ./install_ipopt.sh
-RUN ./install_topfarm.sh
+WORKDIR /install
+ADD install_kernels.sh /install/
+RUN chmod a+x /install/install_kernels.sh
 
 ADD systemuser.sh /srv/singleuser/systemuser.sh
 CMD ["sh", "/srv/singleuser/systemuser.sh"]
