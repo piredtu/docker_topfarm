@@ -16,8 +16,9 @@ WORKDIR /install/
 ADD install*.sh ./
 RUN chmod a+x install*.sh
 RUN ./install_openmdao.sh
-RUN ./install_topfarm.sh
 RUN ./install_windflo.sh
+RUN ./install_ipopt.sh
+RUN ./install_topfarm.sh
 
 ADD systemuser.sh /srv/singleuser/systemuser.sh
 CMD ["sh", "/srv/singleuser/systemuser.sh"]
