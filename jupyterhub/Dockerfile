@@ -103,6 +103,9 @@ EXPOSE 8000
 # Install dockerspawner and oauthenticator
 RUN pip3 install docker-py
 
+# Fixing pip3
+RUN curl https://bootstrap.pypa.io/get-pip.py | python3
+
 # dockerspawner commit number (Jan 8, 2015)
 ENV DOCKERSPAWNER_COMMIT a0aefa192e7ad7e5650a38545af4aa9042839d3a
 # oauthenticator commit number (Nov 25, 2014)
