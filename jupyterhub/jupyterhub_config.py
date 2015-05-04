@@ -12,11 +12,13 @@ c.JupyterHub.log_level = 10
 c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'
 c.GitHubOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
 c.Authenticator.whitelist = whitelist = set()
+c.JupyterHub.admin_users = admin = set('rethore')
 
 # Configure the spawner
 c.JupyterHub.spawner_class = 'dockerspawner.SystemUserSpawner'
+c.SystemUserSpawner.host_homedir_format_string = '/home/{username}'
 c.SystemUserSpawner.user_ids = userids = dict()
-c.SystemUserSpawner.container_image = 'piredtu/topfarm_systemuser'
+c.SystemUserSpawner.container_image = os.environ['USER_IMAGE']
 
 # The docker instances need access to the Hub, so the default loopback port
 # doesn't work:
