@@ -28,6 +28,8 @@ EXPOSE 8000
 # Install dockerspawner and oauthenticator
 RUN pip3 install docker-py
 
+RUN apt-get install -y curl
+
 # Fixing pip3
 RUN curl https://bootstrap.pypa.io/get-pip.py | python3
 
