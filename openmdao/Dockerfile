@@ -21,17 +21,19 @@ RUN apt-get update && apt-get install -y -q \
     git \
     python-dev \
     python-pip \
+    python-numpy \
+    python-scipy \
     subversion \
     wget
 
-RUN apt-get update && apt-get build-dep -y \
-    python-numpy \
-    python-scipy
+#RUN apt-get update && apt-get build-dep -y \
+#    python-numpy \
+#    python-scipy
 
 RUN pip install --upgrade pip
 RUN pip install virtualenv
-RUN pip install numpy
-RUN pip install scipy
+#RUN pip install numpy
+#RUN pip install scipy
 
 
 WORKDIR /install
