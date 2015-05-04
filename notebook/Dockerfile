@@ -6,7 +6,7 @@ FROM  piredtu/topfarm
 
 MAINTAINER Pierre-Elouan Rethore <pire@dtu.dk>
 
-RUN apt-get build-dep -y \
+RUN apt-get install -y \
     ipython-notebook
 
 WORKDIR /install
