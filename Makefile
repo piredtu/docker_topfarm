@@ -6,7 +6,8 @@ NOTEBOOK_NAME := topfarm_notebook
 GITHUB_ENV := /Users/pire/github.env
 # The env file containing the github app token
 GITHUB_APP := /root/env
-USER_IMAGE := piredtu/topfarm_systemuser
+USER_IMAGE := ptimof/systemuser
+#USER_IMAGE := piredtu/topfarm_systemuser
 
 images: openmdao fusedwind topfarm topfarm_notebook topfarm_systemuser topfarm_hub
 
@@ -36,7 +37,8 @@ topfarm_hub: #topfarm_systemuser jupyterhub/Dockerfile
 
 # Running topfarm_hub
 run_hub:
-	docker run -d -p 8000:8000 -v /var/run/docker.sock:/docker.sock -v /etc/passwd:/srv/jupyterhub/userlist -e 'USER_IMAGE=$(USER_IMAGE)' --env-file $(GITHUB_APP) --net=host --name $(HUB_NAME) piredtu/topfarm_hub
+	#docker run -d -p 8000:8000 -v /var/run/docker.sock:/docker.sock -v /etc/passwd:/srv/jupyterhub/userlist -e 'USER_IMAGE=$(USER_IMAGE)' --env-file $(GITHUB_APP) --net=host --name $(HUB_NAME) piredtu/topfarm_hub
+	docker run -d -p 8000:8000 -v /var/run/docker.sock:/docker.sock -v /etc/passwd:/srv/jupyterhub/userlist -e 'USER_IMAGE=$(USER_IMAGE)' --env-file $(GITHUB_APP) --net=host --name $(HUB_NAME) ptimof/jupyterhub
 
 # Stop the topfarm_hub
 stop_hub:
