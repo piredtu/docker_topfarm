@@ -6,7 +6,6 @@ NOTEBOOK_NAME := topfarm_notebook
 GITHUB_ENV := /Users/pire/github.env
 # The env file containing the github app token
 GITHUB_APP := /root/env
-ID_RSA := /Users/pire/.ssh/id_retho
 
 images: openmdao fusedwind topfarm topfarm_notebook topfarm_systemuser topfarm_hub
 
@@ -45,7 +44,7 @@ stop_hub:
 
 # Run a single user version of topfarm
 run_notebook:
-	docker run -d -p $(PORT_NOTEBOOK):8888 -v $(ID_RSA):/install/id_rsa -v /Users/pire:/work/pire --env-file $(GITHUB_ENV) --name $(NOTEBOOK_NAME) piredtu/topfarm_notebook
+	docker run -d -p $(PORT_NOTEBOOK):8888 -v /Users/pire:/work/pire --env-file $(GITHUB_ENV) --name $(NOTEBOOK_NAME) piredtu/topfarm_notebook
 	sleep 0.5
 	open http://docker:$(PORT_NOTEBOOK)
 	xterm -e "docker logs -f $(NOTEBOOK_NAME)"
