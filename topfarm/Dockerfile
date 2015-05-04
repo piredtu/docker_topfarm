@@ -15,7 +15,7 @@ FROM  piredtu/fusedwind
 
 MAINTAINER Pierre-Elouan Rethore <pire@dtu.dk>
 
-RUN apt-get build-dep -y \
+RUN apt-get install -y \
     python-matplotlib
 
 WORKDIR /install
@@ -24,6 +24,9 @@ WORKDIR /install
 ADD install_ipopt.sh /install/
 RUN chmod a+x /install/install_ipopt.sh
 RUN /install/install_ipopt.sh
+
+RUN apt-get install -y \
+    cython
 
 # Install windflow
 ADD install_windflo.sh /install/
