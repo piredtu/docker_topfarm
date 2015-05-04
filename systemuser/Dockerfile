@@ -11,7 +11,15 @@ EXPOSE 8888
 
 ENV SHELL /bin/bash
 
+RUN apt-get install -y \
+    python3-pip \
+    ipython3-notebook
+
+
 WORKDIR /install
+ADD requirements.txt /install/
+RUN pip3 install -r /install/requirements.txt
+
 ADD install_kernels.sh /install/
 RUN chmod a+x /install/install_kernels.sh
 

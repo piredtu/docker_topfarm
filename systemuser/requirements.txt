@@ -1,0 +1,6 @@
+ipython>=3.0
+tornado>=4.0
+jsonschema
+jinja2
+pyzmq
+terminado
