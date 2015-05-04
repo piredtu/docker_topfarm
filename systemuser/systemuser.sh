@@ -10,7 +10,7 @@ if [ ! -d $HOME/topfarm ]; then
 fi
 
 chown -R $USER /install
-ln -s /install $HOME/install
+sudo -E -u $USER ln -s /install $HOME/install
 sudo -E -u $USER /install/install_kernels.sh
 
 exec sudo -E -u $USER jupyterhub-singleuser \
