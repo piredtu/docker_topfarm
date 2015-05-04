@@ -13,10 +13,9 @@ RUN npm install -g configurable-http-proxy
 RUN mkdir -p /srv/
 
 # install jupyterhub
-ADD requirements.txt /tmp/requirements.txt
-RUN pip3 install -r /tmp/requirements.txt
 
 WORKDIR /srv/
+RUN pip3 install -e git+https://github.com/jupyter/jupyterhub.git#egg=jupyterhub
 ADD . /srv/jupyterhub
 WORKDIR /srv/jupyterhub/
 
@@ -50,4 +49,3 @@ ENV DOCKER_HOST unix://docker.sock
 
 ONBUILD ADD jupyterhub_config.py /srv/jupyterhub/jupyterhub_config.py
 CMD ["jupyterhub", "-f", "/srv/jupyterhub/jupyterhub_config.py"]
-
