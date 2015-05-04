@@ -19,9 +19,6 @@ RUN pip3 install -e git+https://github.com/jupyter/jupyterhub.git#egg=jupyterhub
 ADD . /srv/jupyterhub
 WORKDIR /srv/jupyterhub/
 
-RUN pip3 install .
-
-WORKDIR /srv/jupyterhub/
 
 # Derivative containers should add jupyterhub config,
 # which will be used when starting the application.
@@ -41,6 +38,8 @@ ENV OAUTHENTICATOR_COMMIT 98837269f6ca0f5ba9b638c0d3f5b48fd392a9ff
 
 RUN pip3 install git+https://github.com/jupyter/dockerspawner.git
 #@$DOCKERSPAWNER_COMMIT
+RUN curl https://bootstrap.pypa.io/get-pip.py | python3
+
 RUN pip3 install git+https://github.com/jupyter/oauthenticator.git
 #@$OAUTHENTICATOR_COMMIT
 
