@@ -1,6 +1,6 @@
 # Run with the DockerSpawner in JupyterHub
 
-FROM  piredtu/topfarm:latest
+FROM  piredtu/topfarm
 
 MAINTAINER Pierre-Elouan Rethore <pire@dtu.dk>
 
@@ -12,21 +12,11 @@ EXPOSE 8888
 ENV SHELL /bin/bash
 
 RUN apt-get update \
- && apt-get install -y \
+ && apt-get install -y -q \
     python3-pip \
-    ipython3-notebook
-    zlib1g-dev \
-    libzmq3-dev \
-    sqlite3 \
-    libsqlite3-dev \
-    pandoc \
-    libcurl4-openssl-dev \
-    nodejs \
-    nodejs-legacy \
-    npm \
+    ipython3-notebook \
  && apt-get autoremove -y \
  && apt-get clean -y
-
 
 RUN mkdir -p /srv/
 
@@ -36,8 +26,9 @@ RUN pip3 install -r /install/requirements.txt
 
 RUN python3 -m IPython kernelspec install-self
 
-ADD install_kernels.sh /install/
-RUN chmod a+x /install/install_kernels.sh
+ADD install_*.sh /install/
+RUN chmod a+x /install/install_*.sh
+
 
 ADD systemuser.sh /srv/singleuser/systemuser.sh
 RUN chmod a+x /srv/singleuser/systemuser.sh

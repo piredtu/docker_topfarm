@@ -4,3 +4,4 @@ jsonschema
 jinja2
 pyzmq
 terminado
+sqlalchemy
