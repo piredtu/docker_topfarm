@@ -16,6 +16,8 @@ FROM  piredtu/fusedwind
 MAINTAINER Pierre-Elouan Rethore <pire@dtu.dk>
 
 RUN apt-get install -y \
+    libfreetype6-dev \
+    libpng12-dev \
     python-matplotlib
 
 WORKDIR /install
@@ -34,7 +36,8 @@ RUN chmod a+x /install/install_windflo.sh
 RUN /install/install_windflo.sh
 
 RUN apt-get install -y \
-    swig
+    swig \
+    libxft-dev
 
 # Install Topfarm
 ADD install_topfarm.sh /install/
