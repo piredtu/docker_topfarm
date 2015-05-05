@@ -7,33 +7,38 @@ import sys
 
 # Base configuration
 c.JupyterHub.log_level = 10
+c.Authenticator.admin_users = admin = set()
+c.JupyterHub.db_url = 'sqlite:////srv/jupyterhub_db/jupyterhub.sqlite'
 
 # Configure the authenticator
-c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'
-c.GitHubOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
+
+c.JupyterHub.authenticator_class = 'docker_oauth.DockerOAuthenticator'
+#c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'
+c.DockerOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
+c.DockerOAuthenticator.create_system_users = True
 c.Authenticator.whitelist = whitelist = set()
-c.JupyterHub.admin_users = admin = set('rethore')
 
 # Configure the spawner
 c.JupyterHub.spawner_class = 'dockerspawner.SystemUserSpawner'
 c.SystemUserSpawner.host_homedir_format_string = '/home/{username}'
-c.SystemUserSpawner.user_ids = userids = dict()
-c.SystemUserSpawner.container_image = os.environ['USER_IMAGE']
+c.SystemUserSpawner.container_image = 'piredtu/topfarm_systemuser'
+#os.environ['USER_IMAGE']
 
 # The docker instances need access to the Hub, so the default loopback port
 # doesn't work:
 from IPython.utils.localinterfaces import public_ips
 c.JupyterHub.hub_ip = public_ips()[0]
 
-# Add users to the whitelist and also record their user ids
-# Assumes /etc/passwd format
-here = os.path.dirname(__file__)
-with open(os.path.join(here, 'userlist')) as f:
-	for line in f:
-		if not line:
-			continue
-		name, shadow, uid, gid, fullname, home, shell  = line.split(":")
-		if int(uid) < 1000:
-			continue
-		whitelist.add(name)
-		userids[name] = uid
+# Add users to the admin list, the whitelist, and also record their user ids
+root = os.environ.get('OAUTHENTICATOR_DIR', os.path.dirname(__file__))
+sys.path.insert(0, root)
+
+with open(os.path.join(root, 'userlist')) as f:
+    for line in f:
+        if line.isspace():
+            continue
+        parts = line.split()
+        name = parts[0]
+        whitelist.add(name)
+        if len(parts) > 1 and parts[1] == 'admin':
+            admin.add(name)
