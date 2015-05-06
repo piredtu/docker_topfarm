@@ -19,4 +19,5 @@ pip install git+http://github.com/OpenMDAO-Plugins/pyopt_driver.git@0.19#egg=pyo
 # Should be added in topfarm requirements.txt
 pip install --upgrade matplotlib
 pip install ipython
+pip install scikit-learn
 pip install -e git+http://github.com/DTUWindEnergy/TOPFARM.git#egg=topfarm
