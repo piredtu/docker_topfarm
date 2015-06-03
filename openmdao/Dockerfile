@@ -48,4 +48,7 @@ RUN curl http://openmdao.org/releases/0.12.0/go-openmdao-0.12.0.py | python2
 RUN apt-get autoremove -y
 RUN apt-get clean all
 
+ADD o10.3 /bin/
+RUN chmod +x /bin/o10.3
+
 CMD /bin/bash
