@@ -9,7 +9,7 @@
 #       $ python foo.py
 #
 
-FROM  ubuntu:14.10
+FROM  ubuntu:15.10
 
 MAINTAINER Pierre-Elouan Rethore <pire@dtu.dk>
 
@@ -39,10 +39,11 @@ RUN pip install virtualenv
 WORKDIR /install
 
 # Install OpenMDAO 0.10.3.2
-RUN curl http://openmdao.org/releases/0.10.3.2/go-openmdao-0.10.3.2.py | python2
+RUN pip install requests==2.2.1
+RUN curl http://openmdao.org/releases/0.10.3.2/go-openmdao-0.10.3.2.py | python2  2> log1.txt
 
 # Install OpenMDAO 0.12.0
-RUN curl http://openmdao.org/releases/0.12.0/go-openmdao-0.12.0.py | python2
+RUN curl http://openmdao.org/releases/0.12.0/go-openmdao-0.12.0.py | python2  2> log2.txt
 
 # Clear package repository cache
 RUN apt-get autoremove -y
