@@ -40,10 +40,10 @@ WORKDIR /install
 
 # Install OpenMDAO 0.10.3.2
 RUN pip install requests==2.2.1
-RUN curl http://openmdao.org/releases/0.10.3.2/go-openmdao-0.10.3.2.py | python2  2> log1.txt
+RUN curl http://openmdao.org/releases/0.10.3.2/go-openmdao-0.10.3.2.py | python2
 
 # Install OpenMDAO 0.12.0
-RUN curl http://openmdao.org/releases/0.12.0/go-openmdao-0.12.0.py | python2  2> log2.txt
+RUN curl http://openmdao.org/releases/0.12.0/go-openmdao-0.12.0.py | python2  
 
 # Clear package repository cache
 RUN apt-get autoremove -y
